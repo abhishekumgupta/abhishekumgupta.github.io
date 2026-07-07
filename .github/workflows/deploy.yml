@@ -27,9 +27,9 @@ jobs:
 
       - name: Build
         run: |
-          mkdir -p site/themes
-          ln -s ../.. site/themes/hugo-theme-console
-          cd site && hugo --minify
+          mkdir -p themes/hugo-theme-console
+          cp -r layouts static theme.toml themes/hugo-theme-console/
+          cd site && hugo --minify --themesDir ../themes
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,0 +1,36 @@
+baseurl = "https://abhishekumgupta.github.io/"
+title = "abhishekgupta"
+theme = "hugo-theme-console"
+languageCode = "en-us"
+
+[params]
+  # Cutting off the page title to two chars for mobile (console-demo -> co)
+  titleCutting = true
+
+  # Set the animation style -- https://animate.style/
+  # To disable animations, please remove or comment animationStyle parameter
+  animateStyle = "animated zoomIn fast"
+
+  linkedinUrl = "https://www.linkedin.com/in/iam-abhishek/"
+  scholarUrl = "https://scholar.google.com/citations?user=46FEXfMAAAAJ&hl"
+  githubUrl = "https://github.com/satyam52"
+
+  [[params.navlinks]]
+  name = "about"
+  url = "about/"
+
+  [[params.navlinks]]
+  name = "posts"
+  url = "posts/"
+
+  [[params.navlinks]]
+  name = "publications"
+  url = "publications/"
+
+  # [[params.navlinks]]
+  # name = "library"
+  # url = "library/"
+
+  # [[params.navlinks]]
+  # name = "now"
+  # url = "now/"

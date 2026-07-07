@@ -1,0 +1,56 @@
+{{ define "main" }}
+
+<h1>Hello!</h1>
+
+<p>
+I'm <strong>Abhishek Gupta</strong>, a Research Fellow at <strong>Microsoft Research</strong>, trying to give LLM agents a memory better than mine. When not teaching machines to remember things, I'm usually getting them to understand speech — across languages and accents.
+</p>
+
+<p>
+I completed my Master's at <strong>IIT Bombay</strong> in 2025, where I picked up interests in <strong>LLM agents</strong>, <strong>speech recognition</strong>, and <strong>multimodal learning</strong> that I still can't put down.
+</p>
+
+<p>
+<a href="about/">more about me →</a>
+</p>
+<br/>
+
+{{ with .Site.GetPage "/posts" }}
+  {{ $posts := sort .Pages "Date" "desc" (where .Pages ".Params.private" "!=" true) }}
+  {{ if $posts }}
+<h1>Latest posts</h1>
+
+<div class="posts-list">
+    {{ range first 3 $posts }}
+        <div class="post">
+            <p>
+                <div class="date">{{ .Date | time.Format ":date_medium" }}</div>
+                <h1><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></h1>
+                {{ .Summary }}
+            </p>
+        </div>
+    {{ end }}
+</div>
+  {{ end }}
+{{ end }}
+
+{{ with .Site.GetPage "/publications" }}
+  {{ $pubs := sort .Pages "Date" "desc" }}
+  {{ if $pubs }}
+<h1>Latest publications</h1>
+
+<div class="publications-list">
+    {{ range first 5 $pubs }}
+        <div class="publication-item">
+            <span class="pub-year">{{ .Date | time.Format "2006" }}</span>
+            <div class="pub-details">
+                <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
+                <div class="pub-authors">{{ .Summary }}</div>
+            </div>
+        </div>
+    {{ end }}
+</div>
+  {{ end }}
+{{ end }}
+
+{{ end }}

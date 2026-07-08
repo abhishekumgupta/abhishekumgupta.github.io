@@ -17,7 +17,32 @@
         </a>
         <span class="footer-sep">|</span>
         <span>Abhishek &copy; {{ now.Year }}</span>
+        <span id="gc-wrapper" style="display:none;">
+            <span id="gc-views" title="Page views">
+            <span class="footer-sep">|</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span id="gc-count"></span>
+            </span>
+        </span>
         <span class="footer-sep">|</span>
         <span>Powered by <a class="no-style" href="https://gohugo.io/">Hugo</a> with <a class="no-style" href="https://github.com/mrmierzejewski/hugo-theme-console/">Console Theme</a></span>
     </nav>
 </div>
+<script>
+  window.addEventListener('load', function() {
+    if (typeof window.goatcounter === 'undefined' || !window.goatcounter.visit_count) return;
+    var p = encodeURIComponent(location.pathname || '/');
+    var r = new XMLHttpRequest();
+    r.open('GET', 'https://abhishekumgupta.goatcounter.com/counter/' + p + '.json');
+    r.onload = function() {
+      if (r.status === 200) {
+        try {
+          var data = JSON.parse(r.responseText);
+          document.getElementById('gc-count').textContent = data.count_unique || data.count;
+          document.getElementById('gc-wrapper').style.display = 'inline';
+        } catch(e) {}
+      }
+    };
+    r.send();
+  });
+</script>

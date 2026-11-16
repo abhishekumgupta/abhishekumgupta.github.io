@@ -1,15 +1,15 @@
 +++
 title = "Now"
-date = "2026-07-07"
+date = "2026-11-16"
 +++
 
-*Updated: July 2026*
+*Updated: November 2026*
 
 ## What I'm doing now
 
 - **Research Fellow at Microsoft Research** — building long-term agentic memory systems for LLM agents and working with MS Teams on procedural knowledge graphs for MCP tool selection.
 
-- **Publishing** — our paper on complementary curation and consolidation for agent memory is under review.
+- **Publishing** — our paper on [complementary curation and consolidation for agent memory](https://aclanthology.org/2026.findings-aacl.218/) is published in Findings of IJCNLP-AACL 2026.
 
 - **Reading** — exploring the intersection of memory-augmented architectures and knowledge graphs.
 

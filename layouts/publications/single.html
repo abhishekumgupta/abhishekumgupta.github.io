@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+
+<div class="publication-links">
+    {{ with .Params.paper }}
+    <a class="btn btn-primary btn-small" href="{{ . }}" target="_blank" rel="noopener">Paper</a>
+    {{ end }}
+    {{ with .Params.pdf }}
+    <a class="btn btn-default btn-ghost btn-small" href="{{ . }}" target="_blank" rel="noopener">PDF</a>
+    {{ end }}
+</div>
+
+{{ with .Params.abstract }}
+<h2>Abstract</h2>
+<p>{{ . }}</p>
+{{ end }}
+{{ end }}

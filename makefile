@@ -9,4 +9,4 @@ usage: ### Usage (default)
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed 's/^/   /' | sed -e 's/\\$$//' | sed -e 's/#/	/g'
 
 hugo-server: ## Run Hugo web server and serve the site
-	cd site; hugo server --cleanDestinationDir --themesDir ../../ -t hugo-theme-console
+	cd site; hugo server --disableFastRender --noHTTPCache --cleanDestinationDir --themesDir ../../ -t hugo-theme-console

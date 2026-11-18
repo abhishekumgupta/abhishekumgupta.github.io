@@ -39,17 +39,7 @@ I completed my Master's at <strong>IIT Bombay</strong> in 2025, where I picked u
   {{ if $pubs }}
 <h1>Latest publications</h1>
 
-<div class="publications-list">
-    {{ range first 5 $pubs }}
-        <div class="publication-item">
-            <span class="pub-year">{{ .Date | time.Format "2006" }}</span>
-            <div class="pub-details">
-                <a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a>
-                <div class="pub-authors">{{ .Summary }}</div>
-            </div>
-        </div>
-    {{ end }}
-</div>
+{{ partial "publication-tree.html" (first 5 $pubs) }}
   {{ end }}
 {{ end }}
 

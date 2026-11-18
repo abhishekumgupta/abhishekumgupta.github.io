@@ -1,0 +1,18 @@
+<div class="publication-tree">
+  <div class="tree-root">publication.log</div>
+  <ul class="tree" aria-label="Publications by year">
+    {{ range .GroupByDate "2006" }}
+    <li>
+      <span class="tree-year">{{ .Key }}/</span>
+      <ul>
+        {{ range .Pages }}
+        <li>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <div class="pub-authors">{{ .Summary }}</div>
+        </li>
+        {{ end }}
+      </ul>
+    </li>
+    {{ end }}
+  </ul>
+</div>

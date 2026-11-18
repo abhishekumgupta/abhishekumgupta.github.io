@@ -3,6 +3,9 @@
 <br/>
 {{ .Content }}
 
+{{ if eq .Section "publications" }}
+{{ partial "publication-tree.html" (sort (where .Pages "Params.private" "!=" true) "Date" "desc") }}
+{{ else }}
 <div class="posts-list">
 {{ range sort .Pages "Date" "desc" }}
     {{ if not .Params.private }}
@@ -16,5 +19,6 @@
     {{ end }}
 {{ end }}
 </div>
+{{ end }}
 
 {{ end }}

@@ -10,7 +10,7 @@
     <meta name="googlebot" content="index,follow,snippet,archive">
     <link rel="stylesheet" href="{{ "hugo-theme-console/css/terminal-0.7.4.min.css" | absURL }}">
     <link rel="stylesheet" href="{{ "hugo-theme-console/css/animate-4.1.1.min.css" | absURL }}">
-    <link rel="stylesheet" href="{{ "hugo-theme-console/css/console.css" | absURL }}">
+    <link rel="stylesheet" href="{{ "hugo-theme-console/css/console.css" | absURL }}?v={{ now.Unix }}">
     {{ with resources.Get "css/custom.css" }}
       {{ $css := . | minify | fingerprint }}
       <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
@@ -40,10 +40,21 @@
         <div class="terminal-nav">
           <header class="terminal-logo">
             <div class="logo terminal-prompt">
-              {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
-              {{ $.Scratch.Add "path" .Site.BaseURL }}
+              {{ $command := "cat" }}
+              {{ $argument := printf "%s.txt" (strings.TrimPrefix "/" .Path) }}
+              {{ if .IsHome }}
+                {{ $command = "ls" }}
+                {{ $argument = "" }}
+              {{ else if or .IsSection (eq .Kind "taxonomy") (eq .Kind "term") }}
+                {{ $command = "tree" }}
+                {{ $argument = printf "%s/" (strings.TrimPrefix "/" .Path) }}
+                {{ if eq .Section "publications" }}{{ $argument = "publication.log" }}{{ end }}
+              {{ else if eq .Kind "404" }}
+                {{ $command = "help" }}
+                {{ $argument = "404" }}
+              {{ end }}
               <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~#
-              {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
+              <span class="terminal-command"><span class="command-name">{{ $command }}</span>{{ with $argument }} <span class="command-argument">{{ . }}</span>{{ end }}</span></div></header>
           <nav class="terminal-menu">
             <ul vocab="https://schema.org/" typeof="BreadcrumbList">
                 {{ range $index, $element := .Site.Params.navlinks }}

@@ -42,6 +42,8 @@
     --global-line-height: 1.6em;
     --page-width: 70em;
     --display-h1-decoration: 1;
+    --command-name-color: #187548;
+    --command-file-color: #925400;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,6 +59,8 @@
 	--progress-bar-background: #3f3f44;
 	--progress-bar-fill: #62c4ff;
 	--code-bg-color: #3f3f44;
+        --command-name-color: #8dddab;
+        --command-file-color: #edc17e;
     }
 }
 
@@ -87,6 +91,8 @@
     --progress-bar-background: #3f3f44;
     --progress-bar-fill: #62c4ff;
     --code-bg-color: #3f3f44;
+    --command-name-color: #8dddab;
+    --command-file-color: #edc17e;
 }
 
 :root[data-theme="light"] {
@@ -99,6 +105,8 @@
     --progress-bar-background: #727578;
     --progress-bar-fill: #151515;
     --code-bg-color: #e8eff2;
+    --command-name-color: #187548;
+    --command-file-color: #925400;
 }
 
 /* Theme toggle button */
@@ -123,45 +131,73 @@
     margin-left: 0;
 }
 
-.publications-list .publication-item {
-    margin-bottom: 12px;
+.publication-tree {
     font-size: 0.9em;
-    display: flex;
-    align-items: baseline;
+    margin: 1rem 0 2rem;
 }
 
-.publications-list .publication-item .pub-year {
+.tree-root,
+.tree-year {
     color: var(--secondary-color);
-    min-width: 50px;
-    flex-shrink: 0;
 }
 
-.publications-list .publication-item .pub-details {
-    flex: 1;
+.tree,
+.tree ul {
+    list-style: none;
+    margin: 0 0 0 0.5ch;
+    padding: 0;
 }
 
-.publications-list .publication-item .pub-authors {
+.tree li {
+    padding: 0 0 0.75rem 2ch;
+    overflow-wrap: anywhere;
+}
+
+.tree li::before,
+.tree li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-color: var(--secondary-color);
+}
+
+.tree li::before {
+    width: 1.25ch;
+    height: 0.8em;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.tree li::after {
+    height: 100%;
+    border-left: 1px solid var(--secondary-color);
+}
+
+.tree li:last-child {
+    padding-bottom: 0;
+}
+
+.tree li:last-child::after {
+    height: 0.8em;
+}
+
+.publication-tree .pub-authors {
     font-size: 0.9em;
     color: var(--secondary-color);
     margin-top: 2px;
 }
 
-.publications-list .publication-item .pub-authors p {
+.publication-tree .pub-authors p {
     margin: 0;
     padding: 0;
     font-size: inherit;
 }
 
-.publications-list .publication-item .pub-authors strong {
+.publication-tree .pub-authors strong {
     font-weight: bold;
     font-size: inherit;
     font-family: inherit;
     color: var(--font-color);
-}
-
-.publications-list .publication-item .date {
-    color: var(--secondary-color);
-    margin-right: 10px;
 }
 
 .publication-links {
@@ -289,6 +325,40 @@ strong {
     font-weight: normal;
 }
 
+.terminal-nav {
+    flex-wrap: wrap;
+    column-gap: 2rem;
+}
+
+.terminal-logo {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.terminal-logo .terminal-prompt {
+    display: block;
+    white-space: normal;
+    overflow: visible;
+    overflow-wrap: anywhere;
+}
+
+.command-name {
+    color: var(--command-name-color);
+}
+
+.command-argument {
+    color: var(--command-file-color);
+}
+
+.terminal-menu {
+    width: auto;
+}
+
+.terminal-menu ul {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+}
+
 .terminal-menu li {
     margin-right: 30px;
 }
@@ -350,6 +420,12 @@ figure {
     content: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .terminal-prompt::after {
+        animation: none;
+    }
+}
+
 .gallery-image {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -379,8 +455,10 @@ figure {
 
 @media only screen and (max-width: 850px) {
     .site-name {
+        display: inline-block;
         width: 2ch;
         overflow: hidden;
+        vertical-align: bottom;
     }
 
     .terminal-nav {
